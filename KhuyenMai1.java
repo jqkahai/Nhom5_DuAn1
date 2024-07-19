@@ -66,9 +66,10 @@ public class KhuyenMai1 extends javax.swing.JFrame {
         txt_Giatrisanpham = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         btn_Tim = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        txt_Timkiem = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbl_Khuyenmai = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -156,14 +157,14 @@ public class KhuyenMai1 extends javax.swing.JFrame {
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(btn_Tim)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txt_Timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btn_Xoa))))
                 .addContainerGap(312, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(38, Short.MAX_VALUE)
+                .addContainerGap(32, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txt_MaKM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,7 +172,7 @@ public class KhuyenMai1 extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(btn_Tim)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(3, 3, 3)
                 .addComponent(txt_TenKM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22)
@@ -197,8 +198,7 @@ public class KhuyenMai1 extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addGap(18, 18, 18)
-                .addComponent(txt_Giatrisanpham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 47, Short.MAX_VALUE))
+                .addComponent(txt_Giatrisanpham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         tbl_Khuyenmai.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -220,24 +220,34 @@ public class KhuyenMai1 extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tbl_Khuyenmai);
 
+        jLabel1.setFont(new java.awt.Font("Bookman Old Style", 1, 18)); // NOI18N
+        jLabel1.setText("QUAN LÝ KHUYÊN MÃI");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(346, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 111, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(268, 268, 268)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(21, 21, 21)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
@@ -258,6 +268,7 @@ public class KhuyenMai1 extends javax.swing.JFrame {
 
     private void btn_SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaActionPerformed
         // TODO add your handling code here:
+        JOptionPane.showConfirmDialog(this,"Bạn muốn sửa không");
         i = tbl_Khuyenmai.getSelectedRow();
         if(i==-1){
             JOptionPane.showMessageDialog(this, "Bạn chưa chọn dòng");
@@ -276,6 +287,7 @@ public class KhuyenMai1 extends javax.swing.JFrame {
 
     private void btn_XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaActionPerformed
         // TODO add your handling code here:
+        JOptionPane.showConfirmDialog(this,"Bạn muốn xóa thông tin không");
         if(this.readFrom()!=null){
             String maXoa = txt_MaKM.getText().toString();
             if(rp.Xoa(maXoa)>0){
@@ -284,11 +296,13 @@ public class KhuyenMai1 extends javax.swing.JFrame {
             }else{
                 JOptionPane.showConfirmDialog(this,"Xóa thông tin thất bại");
             }
+            
         }
     }//GEN-LAST:event_btn_XoaActionPerformed
 
     private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
         // TODO add your handling code here:
+        JOptionPane.showConfirmDialog(this,"Bạn muốn làm mới khuyến mãi không");
         if (this.readFrom() != null) {
             if (rp.Them(this.readFrom()) > 0) {
                 JOptionPane.showMessageDialog(this, "Bạn đã thêm thành công");
@@ -296,6 +310,7 @@ public class KhuyenMai1 extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Thêm thất bại");
             }
+            
         }
         txt_MaKM.setText("");
         txt_TenKM.setText("");
@@ -308,7 +323,7 @@ public class KhuyenMai1 extends javax.swing.JFrame {
 
     private void btn_TimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimActionPerformed
         // TODO add your handling code here:
-        String MaKM = txt_MaKM.getText().trim();
+        String MaKM = txt_Timkiem.getText().trim();
         if(rp.timkiem(MaKM).isEmpty()){
             JOptionPane.showMessageDialog(this,"Thông tin bạn tìm kiếm không có trong bảng");
         }else{
@@ -358,6 +373,7 @@ public class KhuyenMai1 extends javax.swing.JFrame {
     private javax.swing.JButton btn_Them;
     private javax.swing.JButton btn_Tim;
     private javax.swing.JButton btn_Xoa;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -367,7 +383,6 @@ public class KhuyenMai1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tbl_Khuyenmai;
     private javax.swing.JTextField txt_Giatrisanpham;
     private javax.swing.JTextField txt_Hinhthuc;
@@ -375,6 +390,7 @@ public class KhuyenMai1 extends javax.swing.JFrame {
     private javax.swing.JTextField txt_Ngayketthuc;
     private javax.swing.JTextField txt_Ngaytao;
     private javax.swing.JTextField txt_TenKM;
+    private javax.swing.JTextField txt_Timkiem;
     // End of variables declaration//GEN-END:variables
 Model_Khuyenmai readFrom() {
         String MaKhuyenMai;
