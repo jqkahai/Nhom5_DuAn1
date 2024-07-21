@@ -1,110 +1,131 @@
-package Sanpham;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.sql.*;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+package Khuyenmai;
+import java.sql.*;
+import java.util.ArrayList;
 /**
  *
- * @author kingo
+ * @author Linhx
  */
 public class Repositories {
-
-    private static Connection con = null;
-    private PreparedStatement ps = null;
+    private Connection con = null;
+    private  PreparedStatement ps = null;
     private ResultSet rs = null;
     private String sql = null;
-
-    public ArrayList<Model_sanpham> getAll() {
-        sql = "SELECT dbo.SanPham.MaSanPham, dbo.SanPham.ThuongHieu, dbo.SanPham.TenSanPham, dbo.SanPham.NgayTao, dbo.SanPham.NguoiTao, dbo.SanPham.MaDanhMuc, dbo.SanPham.NgayChinhSua, dbo.SanPham.NguoiChinhSua, dbo.SanPham.SoLuongSP, dbo.SanPhamChiTiet.MaSanPham AS Expr1, dbo.SanPhamChiTiet.MaKhuyenMai, dbo.SanPhamChiTiet.MaSPChiTiet, \n"
-                + " dbo.SanPhamChiTiet.MoTa, dbo.SanPhamChiTiet.Gia, dbo.SanPhamChiTiet.SoLuong, dbo.SanPhamChiTiet.HinhThucThanhToan\n"
-                + "FROM  dbo.SanPham INNER JOIN\n"
-                + "         dbo.SanPhamChiTiet ON dbo.SanPham.MaSanPham = dbo.SanPhamChiTiet.MaSanPham";
-
-        ArrayList<Model_sanpham> Listsp = new ArrayList<>();
+    
+    public ArrayList<Model_Khuyenmai> getAll(){
+        ArrayList<Model_Khuyenmai> list_KM = new ArrayList<>();
+        sql = "select ID,MaKhuyenMai,TenKhuyenMai,NgayBatDau,NgayKetThuc,HinhThuc,GiaTiSanPham from KhuyenMai";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                String masp;
-                String thuonghieu;
-                String tensp;
-                String ngaytao;
-                String MaDanhMuc;
-                String soluong;
-                String nguoichinhsua;
-                String nguoitao;
-                String ngaychinhsua;
-                String maKM;
-                String maSPCT;
-                String tenSP;
-                String moTa;
-                Double gia;
-                int soLuong;
-                String hinhthucthanhtoan;
-
-                masp = rs.getString(1);
-                thuonghieu = rs.getString(2);
-                tensp = rs.getString(3);
-                ngaytao = rs.getString(4);
-                MaDanhMuc = rs.getString(5);
-                soluong = rs.getString(6);
-                nguoichinhsua = rs.getString(7);
-                nguoitao = rs.getString(8);
-                ngaychinhsua = rs.getString(9);
-                maSPCT = rs.getString(10);
-                maKM = rs.getString(11);
-                tenSP = rs.getString(12);
-                moTa = rs.getString(13);
-                gia = rs.getDouble(14);
-                soLuong = rs.getInt(15);
-                hinhthucthanhtoan = rs.getString(16);
-                Listsp.add(new Model_sanpham(masp, thuonghieu, tenSP, ngaytao, MaDanhMuc, soluong, nguoichinhsua, nguoitao, ngaychinhsua, maKM, maSPCT, tenSP, moTa, gia, soLuong, hinhthucthanhtoan));
-//                Listsp.add(new Model_sanpham(masp, thuonghieu, tensp, ngaytao, soluong, nguoichinhsua, nguoitao, ngaychinhsua));
+                 int ID;
+                 String MaKhuyenMai;
+                 String TenKhuyenMai;
+                 String NgayBatDau;
+                 String NgayKetThuc;
+                 String hinhThuc;
+                 float giatiSP;
+                 ID = rs.getInt(1);
+                 MaKhuyenMai = rs.getString(2);
+                 TenKhuyenMai = rs.getString(3);
+                 NgayBatDau = rs.getString(4);
+                 NgayKetThuc = rs.getString(5);
+                 hinhThuc = rs.getString(6);
+                 giatiSP = rs.getFloat(7);
+                 Model_Khuyenmai m = new Model_Khuyenmai(ID, MaKhuyenMai, TenKhuyenMai, NgayBatDau, NgayKetThuc, hinhThuc, giatiSP);
+                 list_KM.add(m);
+                
             }
-            return Listsp;
+            return list_KM;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-
     }
-
-    public ArrayList<Model_SPCT> getSPCT(String maSP) {
-
-        ArrayList<Model_SPCT> arrayList = new ArrayList<>();
-        String sql = "		 select MaKhuyenMai,MaSanPham,TenSanPham,MoTa,Gia,SoLuong,HinhThucThanhToan from SanPhamChiTiet where MaSanPham = ?";
-        try (Connection con = DBConnect.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(1, maSP);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                String maKM;
-                String maSPCT;
-                String tenSP;
-                String moTa;
-                Double gia;
-                int soLuong;
-                String hinhthucthanhtoan;
-
-                maKM = rs.getString("MaKhuyenMai");
-                maSPCT = rs.getString("MaSanPham");
-                tenSP = rs.getString("TenSanPham");
-                moTa = rs.getString("MoTa");
-                gia = rs.getDouble("Gia");
-                soLuong = rs.getInt("SoLuong");
-                hinhthucthanhtoan = rs.getString("HinhThucThanhToan");
-                arrayList.add(new Model_SPCT(maKM, maSPCT, tenSP, moTa, gia, soLuong, hinhthucthanhtoan));
-            }
-            return arrayList;
+    public int Them(Model_Khuyenmai m1){
+        sql ="insert into KhuyenMai (MaKhuyenMai,TenKhuyenMai,NgayBatDau,NgayKetThuc,HinhThuc,GiaTiSanPham) values(?,?,?,?,?,?)";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, m1.getMaKhuyenMai());
+            ps.setObject(2, m1.getTenKhuyenMai());
+            ps.setObject(3, m1.getNgayBatDau());
+            ps.setObject(4, m1.getNgayKetThuc());
+            ps.setObject(5, m1.getHinhThuc());
+            ps.setObject(6, m1.getGiatiSP());
+            return ps.executeUpdate();
+            
         } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    public int Sua(Model_Khuyenmai m2,String maSua){
+        sql = "update KhuyenMai set TenKhuyenMai = ?,NgayBatDau =?,NgayKetThuc =?,HinhThuc=?,GiaTiSanPham =? where MaKhuyenMai =?";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, m2.getTenKhuyenMai());
+            ps.setObject(2, m2.getNgayBatDau());
+            ps.setObject(3, m2.getNgayKetThuc());
+            ps.setObject(4, m2.getHinhThuc());
+            ps.setObject(5, m2.getGiatiSP());
+            ps.setObject(6, maSua);
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+        public ArrayList<Model_Khuyenmai> timkiem (String MaKM){
+        ArrayList<Model_Khuyenmai> list_KM = new ArrayList<>();
+        sql = "select MaKhuyenMai,TenKhuyenMai,NgayBatDau,NgayKetThuc,HinhThuc,GiaTiSanPham from KhuyenMai where MaKhuyenMai like ?";
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,'%'+MaKM+'%');
+            rs = ps.executeQuery();
+            while (rs.next()) {
+             
+                 String MaKhuyenMai;
+                 String TenKhuyenMai;
+                 String NgayBatDau;
+                 String NgayKetThuc;
+                 String hinhThuc;
+                 float giatiSP;
+                 
+                 MaKhuyenMai = rs.getString(1);
+                 TenKhuyenMai = rs.getString(2);
+                 NgayBatDau = rs.getString(3);
+                 NgayKetThuc = rs.getString(4);
+                 hinhThuc = rs.getString(5);
+                 giatiSP = rs.getFloat(6);
+                 Model_Khuyenmai m = new Model_Khuyenmai(MaKhuyenMai, TenKhuyenMai, NgayBatDau, NgayKetThuc, hinhThuc, giatiSP);
+                 list_KM.add(m);
+                
+            }
+            return list_KM;
+        } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
+     public int Xoa(String maXoa){
+         sql ="delete from KhuyenMai where MaKhuyenMai =?";
+         try {
+             con = DBConnect.getConnection();
+             ps = con.prepareStatement(sql);
+             ps.setObject(1,maXoa);
+             return ps.executeUpdate();
+         } catch (Exception e) {
+             e.printStackTrace();
+             return 0;
+         }
+     }
+
 }
